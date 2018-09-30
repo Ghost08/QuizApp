@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-danger fixed-top">
+  <a class="navbar-brand" href="javascript:void(0)">Quiz App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="_authService.loggedIn()">
+        <a class="nav-link" routerLink="/quiz" routerLinkActive="active">Quiz !!</a>
+      </li>
+      <li class="nav-item" *ngIf="_authService.loggedIn()">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active">My Results</a>
+      </li>
+      <li class="nav-item"><a class="nav-link" routerLink="/about">About</a></li>
+    </ul>
+
+    <div *ngIf="_authService.loggedIn()">
+      <ul class="navbar-nav" *ngIf="_authService.isValidUser()">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Options
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/master/quiz">Quiz</a>
+            <a class="dropdown-item" routerLink="/master/paper">Paper</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <ul class="navbar-nav">
+      <a class="nav-link" *ngIf="!_authService.loggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
+      <a class="nav-link" *ngIf="!_authService.loggedIn()" routerLink="/register" routerLinkActive="active">Register</a>
+      <a class="nav-link" *ngIf="_authService.loggedIn()" style="cursor: pointer;" (click)="_authService.logoutUser()">Logout</a>
+    </ul>
+
+  </div>
+</nav>
+
+<div class="container">
+  <div *ngIf="_authService.loggedIn()">
+    <h6> Welcome {{_authService.getUserName()}}</h6>
+  </div>
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,114 @@
+<div class="row pt-4">
+  <div class="col-md-10  mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header text-white bg-secondary">
+        <h5 class="mb-0">Add/Edit Question</h5>
+      </div>
+      <div class="card-body">
+        <p><strong>Quiz Name :</strong> {{paperData.quizId.quizName}}</p>
+        <p><strong>Paper Name :</strong> {{paperData.paperTitle}}</p>
+        <p class="text-center"><strong> List Of Questions</strong></p>
+
+        <ul class="list-group">
+          <li class="list-group-item clearfix" *ngFor="let question of questionList">
+            <a href="javascript:void(0)" (click)="selectQuestion(question)" data-toggle="modal" data-target="#questionModal">{{question.questionTitle}}</a>
+            <p class="mb-1">{{question.questionDesc}}</p>
+            <div class="float-right">
+              <a href="javascript:void(0)" (click)="selectQuestion(question)" data-toggle="modal" data-target="#optionModal">
+                <span class="badge badge-pill badge-success">Options</span>
+              </a> &nbsp;
+              <a href="javascript:void(0)" (click)="removeQuestion(question._id)">
+                <span class="badge badge-pill badge-danger">Delete</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer text-muted">
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#questionModal">
+          Add Question
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="questionModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="questionModalLabel">Question Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="errorData.errorMsg" class="alert alert-info" role="alert">{{errorData.errorMsg}}</div>
+        <form class="form">
+          <div class="form-group">
+            <label for="questionTitle">Title <span class="text-danger">*</span></label>
+            <input autocomplete="off" [(ngModel)]="questionData.questionTitle" required id="questionTitle" name="questionTitle"
+              type="text" class="form-control rounded-0">
+          </div>
+          <div class="form-group">
+            <label for="questionDesc">Description</label>
+            <textarea [(ngModel)]="questionData.questionDesc" required id="questionDesc" name="questionDesc" class="form-control rounded-0">
+            </textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" (click)="createQuestion()" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="optionModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="optionModalLabel">Option Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form">
+          <div class="form-group">
+            <label for="optionTitle">Title <span class="text-danger">*</span></label>
+            <input autocomplete="off" [(ngModel)]="optionData.optionTitle" required id="optionTitle" name="optionTitle"
+              type="text" class="form-control rounded-0">
+          </div>
+          <div class="form-group">
+            <label for="optionDesc">Description</label>
+            <textarea [(ngModel)]="optionData.optionDesc" required id="optionDesc" name="optionDesc" class="form-control rounded-0">
+              </textarea>
+          </div>
+
+        </form>
+        <div class="mb-1">
+          <button type="button" (click)="addOptionToQuestion()" class="btn btn-sm btn-primary">Add Option</button>
+        </div>
+        <div class="mt-1">
+          <p class="text-center"><strong>List Of Options</strong></p>
+          <ul class="list-group">
+            <li class="list-group-item clearfix" *ngFor="let option of questionData.options">
+              <a href="javascript:void(0)" title="{{option.optionDesc}}">{{option.optionTitle}}</a>
+              
+              <div class="float-right">
+                <a href="javascript:void(0)" (click)="removeOption(option._id)">
+                  <span class="badge badge-pill badge-danger">Delete</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" (click)="createOption()" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

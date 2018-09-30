@@ -1,0 +1,88 @@
+<div class="row pt-4">
+  <div class="col-md-10  mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header text-white bg-secondary">
+        <h5 class="mb-0">Add/Edit Paper</h5>
+      </div>
+      <div class="card-body">
+        <div class="container">
+         
+          <form>
+            <div class="form-group row">
+              <label for="ddlPapers" class="col-md-2 col-form-label">Quiz Name</label>
+              <div class="col-md-6">
+                <select class="form-control" name="ddlPapers" id="ddlPapers" [(ngModel)]="selectedQuiz" (ngModelChange)="onChangeObj($event)">
+                  <option value="-1">--Select--</option>
+                  <option *ngFor="let quiz of quizList" [ngValue]="quiz._id">{{quiz.quizName}}</option>
+                </select>
+              </div>
+            </div>
+          </form>
+          <div class="table-responsive pt-2">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Paper title</th>
+                  <th>Option</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let paper of paperList">
+                  <td>
+
+                    <a href="javascript:void(0)" title="{{paper.paperDesc}}" style="cursor: pointer;" data-toggle="modal"
+                      data-target="#exampleModal" (click)="setPaperData(paper)">{{paper.paperTitle}}</a>
+                  </td>
+                  <td>
+                    <a [routerLink]="['/master/question',paper.quizId._id,paper._id]">View Questions</a>
+                    &nbsp;
+                    <a [routerLink]="['/master/answer',paper.quizId._id,paper._id]">View Answers</a>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-muted">
+        <button type="button" class="btn btn-sm  btn-primary" data-toggle="modal" data-target="#exampleModal">
+          Add Paper
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Paper Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="errorData.errorMsg" class="alert alert-info" role="alert">{{errorData.errorMsg}}</div>
+        <form class="form">
+          <div class="form-group">
+            <label for="paperTitle">Title <span class="text-danger">*</span></label>
+            <input autocomplete="off" [(ngModel)]="paperData.paperTitle" required id="paperTitle" name="paperTitle"
+              type="text" class="form-control rounded-0">
+          </div>
+          <div class="form-group">
+            <label for="paperDesc">Description <span class="text-danger">*</span></label>
+            <textarea [(ngModel)]="paperData.paperDesc" required id="paperDesc" name="paperDesc" class="form-control rounded-0">
+                    </textarea>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" (click)="createPaper()" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

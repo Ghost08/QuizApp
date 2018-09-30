@@ -1,0 +1,47 @@
+<div class="row pt-4">
+  <div class="col-md-10  mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header text-white bg-secondary">
+        <h5 class="mb-0">Add/Edit Answer</h5>
+      </div>
+      <div class="card-body">
+        <p><strong>Quiz Name :</strong> {{paperData.quizId.quizName}}</p>
+        <p><strong>Paper Name :</strong> {{paperData.paperTitle}}</p>
+        <form>
+          <div class="form-group row">
+            <label for="ddlQuestions" class="col-md-2 col-form-label">Questions</label>
+            <div class="col-md-6">
+              <select class="form-control" name="ddlQuestions" id="ddlQuestions" [(ngModel)]="selectedQuestion"
+                (ngModelChange)="onChangeObj($event)">
+                <option value="-1">--Select--</option>
+                <option *ngFor="let question of questionList" [ngValue]="question._id">{{question.questionTitle}}</option>
+              </select>
+            </div>
+          </div>
+        </form>
+        <p class="text-center"><strong> List Of Options</strong></p>
+
+        <ul class="list-group">
+          <li class="list-group-item clearfix" *ngFor="let option of optionList" >
+            <p class="mb-1">{{option.optionTitle}}</p>
+            <div class="float-right">
+              <div class="form-check">
+                <input class="form-check-input" required type="radio" name="exampleRadios"
+                 [(ngModel)]="answerId" 
+                  value="{{option._id}}">
+                <label class="form-check-label" for="exampleRadios1">
+                  Set as answer
+                </label>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer text-muted">
+        <button type="button" class="btn btn-sm btn-primary" (click)="saveAnswerData()">
+          Save answer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

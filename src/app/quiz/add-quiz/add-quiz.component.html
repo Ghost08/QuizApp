@@ -1,0 +1,75 @@
+<div class="row pt-4">
+  <div class="col-md-10  mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header text-white bg-secondary">
+        <h5 class="mb-0">Add/Edit Quiz</h5>
+      </div>
+      <div class="card-body">
+        <div class="container">          
+          <div class="table-responsive py-2">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Quiz Name</th>
+                  <th>Quiz Type</th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let quiz of quizList">
+                  <td><a href="javascript:void(0)" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal"
+                      (click)="setQuizData(quiz)">{{quiz.quizName}}</a>
+                  </td>
+                  <td>{{quiz.quizType}}</td>                  
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-footer text-muted">
+        <button type="button" class="btn btn-sm  btn-primary" data-toggle="modal" data-target="#exampleModal">
+          Add Quiz
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Quiz Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="errorData.errorMsg" class="alert alert-info" role="alert">{{errorData.errorMsg}}</div>
+        <form class="form">
+          <div class="form-group">
+            <label for="quizName">Title</label>
+            <input autocomplete="off" [(ngModel)]="quizData.quizName" required id="quizName" name="quizName" type="text"
+              class="form-control rounded-0">
+          </div>
+          <div class="form-group">
+            <label for="quizType">Type</label>
+            <input autocomplete="off" [(ngModel)]="quizData.quizType" required id="quizType" name="quizType" type="text"
+              class="form-control rounded-0">
+
+          </div>
+          <div class="form-group">
+            <label for="quizDesc">Description</label>
+            <textarea [(ngModel)]="quizData.quizDesc" required id="quizDesc" name="quizDesc" class="form-control rounded-0">
+                    </textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" (click)="createQuiz()" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

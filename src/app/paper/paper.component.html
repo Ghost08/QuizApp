@@ -1,0 +1,25 @@
+<div class="row pt-4">
+  <div class="col-md-8 mx-auto">   
+    <div class="card rounded-0">
+      <div class="card-header text-white bg-info">
+        <h5 class="mb-0">Quiz : {{quizData.quizName}}</h5>
+      </div>
+      <div class="card-body"> 
+          <p><strong>Type : </strong>{{quizData.quizType}}</p>       
+        <p><strong>Description : </strong>{{quizData.quizDesc}}</p>       
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>Hey there !</strong> Click on the paper link to start the test
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <p class="text-center"><strong> List of papers</strong></p>
+        <div class="list-group">
+          <a [routerLink]="['/question',paper.quizId._id,paper._id]" 
+          class="list-group-item list-group-item-action" 
+          *ngFor="let paper of paperList">{{paper.paperTitle}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="row pt-4">
+  <div class="col-md-8 mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header text-white bg-secondary">
+        <h5 class="mb-0">Test Result</h5>
+      </div>
+      <div class="card-body">
+        <div *ngIf="errorData.errorMsg" class="alert alert-info" role="alert">{{errorData.errorMsg}}</div>
+        <p class="text-center">
+          Thank you for completing this test
+        </p>
+
+
+        <form>
+
+          <div class="form-group row">
+            <label for="quizName" class="col-sm-3 col-form-label font-weight-bold">Quiz Name</label>
+            <div class="col-sm-9">
+              <label class="col-form-label">{{resultData.quizName}}</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="paperName" class="col-sm-3 col-form-label font-weight-bold">Paper Name</label>
+            <div class="col-sm-9">
+              <label class="col-form-label">{{resultData.paperTitle}}</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="totalQuestions" class="col-sm-3 col-form-label font-weight-bold">Questions</label>
+            <div class="col-sm-2">
+              <label class="col-form-label">{{resultData.totalQuestions}}</label>
+            </div>
+
+          </div>
+          <div class="form-group row">
+            <label for="correctAnswers" class="col-sm-3 col-form-label font-weight-bold">Correct</label>
+
+            <div class="col-sm-3">
+              <label class="col-form-label text-success">{{resultData.correctAnswers}}</label>
+            </div>
+            <label for="wrongAnswers" class="col-sm-3 col-form-label font-weight-bold">Wrong</label>
+            <div class="col-sm-3">
+              <label class="col-form-label text-danger">{{resultData.wrongAnswers}}</label>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="paperName" class="col-sm-3 col-form-label font-weight-bold">Result</label>
+            <div class="col-sm-9">
+              <label class="col-form-label">
+                <span class="badge badge-success" *ngIf="resultData.testResult=='Pass'">{{resultData.testResult}}</span>
+                <span class="badge badge-danger" *ngIf="resultData.testResult=='Fail'">{{resultData.testResult}}</span>
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer text-muted">
+        <div class="row">
+          <div class="col-md-6">
+            Applicant: {{resultData.applicantData.userName}}
+          </div>
+          <div class="col-md-6">
+            Date : {{resultData.dateOfSubmmision | date : 'medium'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

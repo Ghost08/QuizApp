@@ -1,0 +1,14 @@
+<div class="row pt-3">
+  <div class="col-md-4 mb-3" *ngFor="let quiz of quizList">
+    <div class="card-deck">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">{{quiz.quizName}}</h5>
+          <p class="card-text">{{quiz.quizDesc}}</p>
+          <!-- <a [routerLink]="['/paper']" [queryParams]="{quizId:quiz._id}" class="btn btn-primary">view</a> -->
+          <a [routerLink]="['/paper',quiz._id]" class="btn btn-success">view</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

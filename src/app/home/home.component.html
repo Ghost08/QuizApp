@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="col-md-10 mx-auto">
+    <div class="table-responsive pt-5">
+      <table class="table" [mfData]="resultList" #mf="mfDataTable" [mfRowsOnPage]="5">
+        <thead>
+          <tr>
+            <th>Quiz</th>
+            <th>Paper</th>
+            <th>Questions</th>
+            <th>Correct</th>
+            <th>Wrong</th>
+            <th>Result</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let result of mf.data">
+            <td>{{result.quizId.quizName}}</td>
+            <td>{{result.paperId.paperTitle}}</td>
+            <td class="text-center">{{result.totalQuestions}}</td>
+            <td class="text-center">{{result.correctAnswers}}</td>
+            <td class="text-center">{{result.wrongAnswers}}</td>
+            <td>
+              <span class="badge badge-success" *ngIf="result.result=='Pass'">{{result.result}}</span>
+              <span class="badge badge-danger" *ngIf="result.result=='Fail'">{{result.result}}</span>
+            </td>
+            <td>{{result.createdDate | date :'medium'}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="7">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+
+    </div>
+  </div>
+</div>

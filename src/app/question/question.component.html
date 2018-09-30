@@ -1,0 +1,39 @@
+<div class="row pt-4">
+  <div class="col-md-8 mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header text-white bg-info">
+        <h5 class="mb-0">Quiz : {{quizData.quizName}} </h5>
+      </div>
+      <div class="card-body">
+        <div *ngIf="errorData.errorMsg" class="alert alert-info" role="alert">{{errorData.errorMsg}}</div>
+        <p><strong>Paper :</strong> {{paperData.paperTitle}} </p>
+        <p><strong>Description :</strong> {{paperData.paperDesc}} </p>
+        <p *ngIf="questionData.questionTitle" class="font-italic">{{questionData.questionTitle}}</p>
+        <p *ngIf="!questionData.questionTitle" class="text-center text-muted">Data Not Available</p>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let option of questionData.options ">
+            <div class="form-check">
+              <input class="form-check-input" required type="radio" name="exampleRadios" [(ngModel)]="answerData.answerId"
+                value="{{option._id}}">
+              <label class="form-check-label" for="exampleRadios1">
+                {{option.optionTitle}}
+              </label>
+            </div>
+          </li>
+        </ul>
+        <div class="float-right mt-1" *ngIf="questionData.questionTitle">
+         <p> {{currentQuestion}} of {{questionCount}}</p>
+        </div>
+      </div>
+      <div class="card-footer text-muted">
+        <div class="float-left">
+          <button class="btn btn-sm btn-success" *ngIf="currentQuestion === questionCount" (click)="submitPaper()">Submit</button>
+        </div>
+
+        <div class="float-right">
+          <button class="btn btn-sm btn-primary" *ngIf="questionCount > currentQuestion" (click)="nextQuestion()">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
