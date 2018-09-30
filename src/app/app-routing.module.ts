@@ -17,7 +17,7 @@ import { AboutComponent } from './about/about.component';
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "/home",
+    redirectTo: "/login",
     pathMatch: "full"
 
   },
