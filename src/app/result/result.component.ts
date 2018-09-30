@@ -13,12 +13,14 @@ export class ResultComponent implements OnInit {
   resultData: any = {
     quizName : "",
     paperTitle :"",
-    TotalQuestions:"",
-    ApplicantData : {},
-    DateOfSubmmision:"",
-    CorrectAnswerCount:0,
-    WrongAnswerCount:0,
-    TestResult : ""
+    totalQuestions:"",
+    applicantData : {
+      "userName":""
+    },
+    dateOfSubmmision:"",
+    correctAnswerCount:0,
+    wrongAnswerCount:0,
+    testResult : ""
 
   };
   errorData: any = {};
@@ -92,7 +94,9 @@ export class ResultComponent implements OnInit {
       for (let i = 0; i < submittedAnswerData.length; i++) {
         let submittedQuestionId = submittedAnswerData[i].questionId;
         let submittedAnswerId = submittedAnswerData[i].answerId;
-        let correctAnswerData = this._answerData.some(f => f.questionId["_id"] === submittedQuestionId);
+        let correctAnswerData = this._answerData.find(f => f.questionId["_id"] === submittedQuestionId);
+        console.log(correctAnswerData);
+
         if (correctAnswerData) {
           if (correctAnswerData.answerId === submittedAnswerId) {
             correctCount++;
