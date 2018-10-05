@@ -1,5 +1,5 @@
 <div class="row pt-4">
-  <div class="col-md-10  mx-auto">
+  <div class="col-md-12  mx-auto">
     <div class="card rounded-0">
       <div class="card-header text-white bg-secondary">
         <h5 class="mb-0">Add/Edit Question</h5>
@@ -11,7 +11,9 @@
 
         <ul class="list-group">
           <li class="list-group-item clearfix" *ngFor="let question of questionList">
-            <a href="javascript:void(0)" (click)="selectQuestion(question)" data-toggle="modal" data-target="#questionModal">{{question.questionTitle}}</a>
+            <a href="javascript:void(0)" (click)="selectQuestion(question)" data-toggle="modal" data-target="#questionModal">
+                <i class="fas fa-pencil-alt"></i> 
+              {{question.questionTitle}}</a>
             <p class="mb-1">{{question.questionDesc}}</p>
             <div class="float-right">
               <a href="javascript:void(0)" (click)="selectQuestion(question)" data-toggle="modal" data-target="#optionModal">
@@ -26,7 +28,7 @@
       </div>
       <div class="card-footer text-muted">
         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#questionModal">
-          Add Question
+            <i class="fas fa-plus"></i> Add Question
         </button>
       </div>
     </div>

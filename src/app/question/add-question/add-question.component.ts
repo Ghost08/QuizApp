@@ -3,7 +3,7 @@ import { QuizService } from '../../quiz.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
 import { ToastrService } from "ngx-toastr";
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-add-question',
   templateUrl: './add-question.component.html',
@@ -40,7 +40,8 @@ export class AddQuestionComponent implements OnInit {
     private _quizService: QuizService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _toastrService: ToastrService) { }
+    private _toastrService: ToastrService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.fetchQuestionData();
@@ -54,12 +55,15 @@ export class AddQuestionComponent implements OnInit {
     });
 
     if (this.quizId && this.paperId) {
+      this.spinner.show();
       this._quizService.fetchPaperData(this.quizId, this.paperId).subscribe(res => {
         this.paperData = res["result"];
         this._quizService.fetchQuestionData(this.quizId, this.paperId).subscribe(res => {
           this.questionList = res["result"];
+          this.spinner.hide();
         }, err => {
           console.log(err);
+          this.spinner.hide();
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401) {
               this._router.navigate(["/login"]);
@@ -69,6 +73,7 @@ export class AddQuestionComponent implements OnInit {
 
       }, err => {
         console.log(err);
+        this.spinner.hide();
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
             this._router.navigate(["/login"]);
@@ -134,14 +139,16 @@ export class AddQuestionComponent implements OnInit {
     this.errorData = {};
     this.questionData.quizId = this.quizId;
     this.questionData.paperId = this.paperId;
-
+    this.spinner.show();
     this._quizService.saveQuestionData(this.questionData)
       .subscribe(res => {
+        this.spinner.hide();
         this._toastrService.success("Details Saved");
-        this.questionData = {};
+        this.questionData = {};        
         this.fetchQuestionData();
       }, err => {
         console.log(err);
+        this.spinner.hide();
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
             this._router.navigate(["/login"]);
@@ -181,11 +188,14 @@ export class AddQuestionComponent implements OnInit {
   removeQuestion(questionId) {
     if (questionId) {
       if (confirm("Are you sure ?")) {
+        this.spinner.show();
         this._quizService.deleteQuestion(questionId).subscribe(res => {
-          this._toastrService.success("Question Deleted");
+          this.spinner.hide();
+          this._toastrService.success("Question Deleted");          
           this.fetchQuestionData();          
         }, err => {
           console.log(err);
+          this.spinner.hide();
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401) {
               this._router.navigate(["/login"]);

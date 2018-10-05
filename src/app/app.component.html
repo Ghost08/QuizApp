@@ -8,12 +8,12 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" *ngIf="_authService.loggedIn()">
-        <a class="nav-link" routerLink="/quiz" routerLinkActive="active">Quiz !!</a>
+        <a class="nav-link" routerLink="/quiz" routerLinkActive="active"><i class="fas fa-table"></i> Quiz</a>
       </li>
       <li class="nav-item" *ngIf="_authService.loggedIn()">
-        <a class="nav-link" routerLink="/home" routerLinkActive="active">My Results</a>
+        <a class="nav-link" routerLink="/home" routerLinkActive="active"><i class="fas fa-clipboard"></i> My Results</a>
       </li>
-      <li class="nav-item"><a class="nav-link" routerLink="/about">About</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/about"><i class="fas fa-info-circle"></i> About</a></li>
     </ul>
 
     <div *ngIf="_authService.loggedIn()">
@@ -21,7 +21,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Options
+            <i class="fas fa-sliders-h"></i> Options
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" routerLink="/master/quiz">Quiz</a>
@@ -31,17 +31,21 @@
       </ul>
     </div>
     <ul class="navbar-nav">
-      <a class="nav-link" *ngIf="!_authService.loggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
-      <a class="nav-link" *ngIf="!_authService.loggedIn()" routerLink="/register" routerLinkActive="active">Register</a>
-      <a class="nav-link" *ngIf="_authService.loggedIn()" style="cursor: pointer;" (click)="_authService.logoutUser()">Logout</a>
+      <a class="nav-link" *ngIf="!_authService.loggedIn()" routerLink="/login" routerLinkActive="active"><i class="fas fa-sign-in-alt"></i>
+        Login</a>
+      <a class="nav-link" *ngIf="!_authService.loggedIn()" routerLink="/register" routerLinkActive="active"><i class="fas fa-user-plus"></i>
+        Register</a>
+      <a class="nav-link" *ngIf="_authService.loggedIn()" style="cursor: pointer;" (click)="_authService.logoutUser()"><i
+          class="fas fa-sign-out-alt"></i> Logout</a>
     </ul>
 
   </div>
 </nav>
 
 <div class="container">
-  <div *ngIf="_authService.loggedIn()">
+  <div *ngIf="_authService.loggedIn()" class="p-2">
     <h6> Welcome {{_authService.getUserName()}}</h6>
   </div>
   <router-outlet></router-outlet>
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="ball-8bits"></ngx-spinner>
 </div>

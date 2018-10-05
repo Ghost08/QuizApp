@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { HttpErrorResponse } from '../../../node_modules/@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from "ngx-toastr";
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
   errorData: any = {};
   constructor(private _auth: AuthService,
               private _router: Router,
-              private _toastrService: ToastrService) { }
+              private _toastrService: ToastrService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
   }
@@ -38,6 +40,7 @@ export class RegisterComponent implements OnInit {
     }
     
     if (isValidForm) {
+      this.spinner.show();
       this.errorData={};      
       this._auth.registerUser(this.registerUserData)
         .subscribe(
@@ -46,11 +49,12 @@ export class RegisterComponent implements OnInit {
             localStorage.setItem("token", res.result.token);     
             localStorage.setItem("userName", res.result.userName);
             localStorage.setItem("role", res.result.role);   
-                
+            this.spinner.hide();    
             this._router.navigate(["/quiz"]);
             this._toastrService.success("Registration complete");
           },
           err => {
+            this.spinner.hide();
             console.log(err);
             if (err instanceof HttpErrorResponse) {
               if (err.status === 401) {

@@ -24,6 +24,9 @@ import { AddQuestionComponent } from './question/add-question/add-question.compo
 import { AddAnswerComponent } from './question/add-answer/add-answer.component';
 import { DataTableModule } from "angular-6-datatable";
 import { AboutComponent } from './about/about.component';
+import { SimpleTimer } from 'ng2-simple-timer';
+import { TimeoutComponent } from './timeout/timeout.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import { AboutComponent } from './about/about.component';
     AddPaperComponent,
     AddQuestionComponent,
     AddAnswerComponent,
-    AboutComponent
+    AboutComponent,
+    TimeoutComponent
   ],
   imports: [
     BrowserModule,
@@ -51,14 +55,16 @@ import { AboutComponent } from './about/about.component';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    DataTableModule
+    DataTableModule,
+    NgxSpinnerModule
   ],
   providers: [AuthService, QuizService, AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }],
+    },
+    SimpleTimer],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

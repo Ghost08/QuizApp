@@ -13,6 +13,7 @@ import { AddQuestionComponent } from './question/add-question/add-question.compo
 import { AddPaperComponent } from './paper/add-paper/add-paper.component';
 import { AddAnswerComponent } from './question/add-answer/add-answer.component';
 import { AboutComponent } from './about/about.component';
+import { TimeoutComponent } from './timeout/timeout.component';
 
 const routes: Routes = [
   {
@@ -69,13 +70,18 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path:"master/answer/:quizId/:paperId",
-    component:AddAnswerComponent,
-    canActivate:[AuthGuard]
+    path: "master/answer/:quizId/:paperId",
+    component: AddAnswerComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path:"about",
-    component:AboutComponent
+    path: "about",
+    component: AboutComponent
+  },
+  {
+    path: "timeout/:quizId/:paperId",
+    component: TimeoutComponent,
+    canActivate: [AuthGuard]
   }
 
 ];

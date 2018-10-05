@@ -1,5 +1,5 @@
 <div class="row pt-4">
-  <div class="col-md-10  mx-auto">
+  <div class="col-md-12  mx-auto">
     <div class="card rounded-0">
       <div class="card-header text-white bg-secondary">
         <h5 class="mb-0">Add/Edit Paper</h5>
@@ -31,12 +31,18 @@
                   <td>
 
                     <a href="javascript:void(0)" title="{{paper.paperDesc}}" style="cursor: pointer;" data-toggle="modal"
-                      data-target="#exampleModal" (click)="setPaperData(paper)">{{paper.paperTitle}}</a>
+                      data-target="#exampleModal" (click)="setPaperData(paper)"><i class="fas fa-pencil-alt"></i> {{paper.paperTitle}}
+                    
+                    </a>
                   </td>
                   <td>
-                    <a [routerLink]="['/master/question',paper.quizId._id,paper._id]">View Questions</a>
+                    <a [routerLink]="['/master/question',paper.quizId._id,paper._id]" title="View Questions">
+                      <i class="fas fa-edit"></i>
+                    </a>
                     &nbsp;
-                    <a [routerLink]="['/master/answer',paper.quizId._id,paper._id]">View Answers</a>
+                    <a [routerLink]="['/master/answer',paper.quizId._id,paper._id]" title="View Answers">
+                      <i class="fas fa-cogs"></i>
+                      </a>
 
                   </td>
                 </tr>
@@ -47,7 +53,7 @@
       </div>
       <div class="card-footer text-muted">
         <button type="button" class="btn btn-sm  btn-primary" data-toggle="modal" data-target="#exampleModal">
-          Add Paper
+            <i class="fas fa-plus"></i> Add Paper
         </button>
       </div>
     </div>

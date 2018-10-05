@@ -4,8 +4,11 @@
 
 export const environment = {
   production: false,
-  quizapiurl : "http://localhost:3000"
+  quizapiurl : "http://localhost:3000",
+
   //quizapiurl : "https://ancient-harbor-99509.herokuapp.com"
+  quizDuration : 60
+    
 };
 
 /*

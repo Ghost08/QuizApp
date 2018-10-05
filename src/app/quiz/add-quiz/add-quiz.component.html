@@ -1,5 +1,5 @@
 <div class="row pt-4">
-  <div class="col-md-10  mx-auto">
+  <div class="col-md-12 mx-auto">
     <div class="card rounded-0">
       <div class="card-header text-white bg-secondary">
         <h5 class="mb-0">Add/Edit Quiz</h5>
@@ -11,14 +11,13 @@
               <thead>
                 <tr>
                   <th>Quiz Name</th>
-                  <th>Quiz Type</th>
-                 
+                  <th>Quiz Type</th>                 
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let quiz of quizList">
                   <td><a href="javascript:void(0)" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal"
-                      (click)="setQuizData(quiz)">{{quiz.quizName}}</a>
+                      (click)="setQuizData(quiz)"><i class="fas fa-pencil-alt"></i> {{quiz.quizName}}</a>
                   </td>
                   <td>{{quiz.quizType}}</td>                  
                 </tr>
@@ -26,11 +25,10 @@
             </table>
           </div>
         </div>
-
       </div>
       <div class="card-footer text-muted">
         <button type="button" class="btn btn-sm  btn-primary" data-toggle="modal" data-target="#exampleModal">
-          Add Quiz
+            <i class="fas fa-plus"></i> Add Quiz
         </button>
       </div>
     </div>
