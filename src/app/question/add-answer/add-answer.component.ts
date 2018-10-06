@@ -58,6 +58,9 @@ export class AddAnswerComponent implements OnInit {
       });
     }
   }
+  redirectToQuestion(){
+    this._router.navigate(["/master/question",this.quizId,this.paperId]);
+  }
 
   private fetchQuestionAndAnswerData(){
     this.spinner.show();

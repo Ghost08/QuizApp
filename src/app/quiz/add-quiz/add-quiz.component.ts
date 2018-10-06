@@ -19,6 +19,11 @@ export class AddQuizComponent implements OnInit {
      private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    
+    this.fetchQuizList();
+  }
+
+  private fetchQuizList() {
     this.spinner.show();
     this._quizSevice.fetchQuizData()
       .subscribe(res => {
@@ -33,7 +38,7 @@ export class AddQuizComponent implements OnInit {
             this._router.navigate(["/login"]);
           }
         }
-      })
+      });
   }
 
   setQuizData(quiz){
@@ -42,7 +47,10 @@ export class AddQuizComponent implements OnInit {
     console.log(this.quizData);
   }
 
-
+  clearData(){
+    this.errorData = {};
+    this.quizData = {};    
+  }
   createQuiz() {
     //console.log(this.quizData);
     let isValidForm: boolean = true;
@@ -71,7 +79,9 @@ export class AddQuizComponent implements OnInit {
           //console.log(quizId);
           this.quizData = {};        
           this.spinner.hide();
-          this._router.navigate(["/quiz"]);
+          this.fetchQuizList();
+          
+          //this._router.navigate(["/quiz"]);
         }, err => {
           this.spinner.hide();
           console.log(err);

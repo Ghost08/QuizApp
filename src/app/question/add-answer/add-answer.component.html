@@ -9,7 +9,7 @@
         <p><strong>Paper Name :</strong> {{paperData.paperTitle}}</p>
         <form>
           <div class="form-group row">
-            <label for="ddlQuestions" class="col-md-2 col-form-label">Questions</label>
+            <label for="ddlQuestions" class="col-md-2 col-form-label"><strong>Questions :</strong></label>
             <div class="col-md-6">
               <select class="form-control" name="ddlQuestions" id="ddlQuestions" [(ngModel)]="selectedQuestion"
                 (ngModelChange)="onChangeObj($event)">
@@ -39,7 +39,10 @@
       </div>
       <div class="card-footer text-muted">
         <button type="button" class="btn btn-sm btn-primary" (click)="saveAnswerData()">
-          Save answer
+          <i class="far fa-save"></i> Save answer
+        </button> &nbsp;
+        <button type="button" class="btn btn-sm btn-primary" (click)="redirectToQuestion()">
+          <i class="fas fa-plus"></i> Add Question
         </button>
       </div>
     </div>

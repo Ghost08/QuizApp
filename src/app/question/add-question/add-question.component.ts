@@ -18,8 +18,8 @@ export class AddQuestionComponent implements OnInit {
   errorData: any = {};
   paperData: any = { "quizId": {} };
   selectedQuestionData: any = {};
- 
-  
+
+
   modalOptions = {
     questionModal: {
       target: "",
@@ -105,6 +105,15 @@ export class AddQuestionComponent implements OnInit {
     }
   }
 
+  clearData() {
+    this.errorData = {};
+    this.questionData = {};
+  }
+
+  redirectToAnswer(){
+    this._router.navigate(["/master/answer",this.quizId,this.paperId]);
+  }
+  
 
   addOptionToQuestion() {
     let isValidForm: boolean = true;
@@ -144,7 +153,7 @@ export class AddQuestionComponent implements OnInit {
       .subscribe(res => {
         this.spinner.hide();
         this._toastrService.success("Details Saved");
-        this.questionData = {};        
+        this.questionData = {};
         this.fetchQuestionData();
       }, err => {
         console.log(err);
@@ -191,8 +200,8 @@ export class AddQuestionComponent implements OnInit {
         this.spinner.show();
         this._quizService.deleteQuestion(questionId).subscribe(res => {
           this.spinner.hide();
-          this._toastrService.success("Question Deleted");          
-          this.fetchQuestionData();          
+          this._toastrService.success("Question Deleted");
+          this.fetchQuestionData();
         }, err => {
           console.log(err);
           this.spinner.hide();

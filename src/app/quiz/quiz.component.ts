@@ -20,8 +20,7 @@ export class QuizComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     this._quizservice.fetchQuizData()
-      .subscribe(res => {
-        console.log(res["result"]);
+      .subscribe(res => {       
         this.quizList = res["result"];
         this.spinner.hide();
       }, err => {

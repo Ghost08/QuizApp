@@ -96,6 +96,11 @@ export class AddPaperComponent implements OnInit {
     this.paperData = Object.assign({}, paper);
   }
 
+  clearData(){
+    this.errorData = {};
+    this.paperData = {};
+  }
+  
   onChangeObj(newObj) {
     //console.log(newObj);
     this.spinner.show();
